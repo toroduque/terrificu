@@ -1,2 +1,2 @@
 # Terrificu
-Simple To do list app that will helps me getting my shit done
+Simple To do list app will helps me getting my shit done
