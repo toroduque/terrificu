@@ -1,6 +1,7 @@
 /* eslint-disable */
 
 import React, { Component } from "react";
+import { Link } from 'react-router-dom';
 import Image from "../Image";
 import Menu from "./MenuIcon";
 import * as styled from "./styled";

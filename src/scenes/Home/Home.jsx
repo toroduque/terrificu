@@ -1,8 +1,10 @@
-import React from 'react';
-import Header from '../../components/Header'
+import React, { Fragment } from 'react';
+import Hero from './Hero';
 
 const Home = () => (
-    <Header />
+    <Fragment>
+        <Hero />
+    </Fragment>
 )
 
 export default Home

@@ -11,7 +11,7 @@ const Menu = ({ onClick, isMenuOpen }) => (
             <styled.MenuLink>Contact</styled.MenuLink>
         </styled.LinksWrapper>
 
-        <styled.MenuIconWrapper onClick={() => onClick()}>
+        <styled.MenuIconWrapper onClick={onClick}>
             <styled.Top isMenuOpen={isMenuOpen}/>
             <styled.Mid isMenuOpen={isMenuOpen}/>
             <styled.Bot isMenuOpen={isMenuOpen}/>

@@ -8,7 +8,8 @@ export const MenuIconWrapper = styled.div`
     justify-content: space-between;
     height: 1.75rem;
     cursor: pointer;
-    z-index: 2;
+    z-index: 11;
+    position: relative;
 `
 
 export const Top = styled.div`
@@ -51,6 +52,7 @@ export const LinksWrapper = styled.div`
     transition: 0.4s;
     transform: scaleY(${props => props.isMenuOpen ? 1 : 0.2});
     transform-origin: top;
+    z-index: 10;
 
     .menu-title {
         color: ${props => props.isMenuOpen ? "#505050" : "white"};
@@ -64,10 +66,17 @@ export const LinksWrapper = styled.div`
     }
 `
 
-export const MenuLink = styled.p`
-    font-family: 'Montserrat';
+export const MenuLink = styled.div`
+    font-family: 'Montserrat';;
     font-size: 1.8rem;
     font-weight: 300;
     color: #505050;
     margin: 0 0 1.6rem 0;
+    width: 100%;
+    transition: 0.4s;
+
+    &:hover {
+        font-weight: normal;
+        cursor: pointer;
+    }
 `
