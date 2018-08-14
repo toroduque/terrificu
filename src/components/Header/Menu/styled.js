@@ -1,36 +1,35 @@
-/* eslint-disable */
 import styled from 'styled-components';
 
-export const MenuIconWrapper = styled.div`
+export const CloseIconWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     height: 1.75rem;
     cursor: pointer;
-    z-index: 11;
+    z-index: 16;
     position: relative;
 `
 
 export const Top = styled.div`
-    width: ${props => props.isMenuOpen ? '2.17rem' : '2rem'};
+    width: ${({isMenuOpen}) => isMenuOpen ? '2.17rem' : '2rem'};
     height: 0.2rem;
-    background-color: ${props => props.isMenuOpen ? '#635AFC' : '#979797'};
-    transform: ${props => props.isMenuOpen ? 'rotate(45deg)' : 'none'};
+    background-color: ${({isMenuOpen}) => isMenuOpen ? '#635AFC' : '#979797'};
+    transform: ${({isMenuOpen}) => isMenuOpen ? 'rotate(45deg)' : 'none'};
     transform-origin: top left;
     transition: 0.2s;
 `
 export const Mid = styled.div`
-    width: ${props => props.isMenuOpen ? '0rem' : '2rem'};
+    width: ${({isMenuOpen}) => isMenuOpen ? '0rem' : '2rem'};
     height: 0.2rem;
-    background-color: ${props => props.isMenuOpen ? '#635AFC' : '#979797'};
+    background-color: ${({isMenuOpen}) => isMenuOpen ? '#635AFC' : '#979797'};
     transition: 0.2s;
 `
 export const Bot = styled.div`
-    width: ${props => props.isMenuOpen ? '2.17rem' : '2rem'};
+    width: ${({isMenuOpen}) => isMenuOpen ? '2.17rem' : '2rem'};
     height: 0.2rem;
-    background-color: ${props => props.isMenuOpen ? '#635AFC' : '#979797'};
-    transform: ${props => props.isMenuOpen ? 'rotate(-45deg)' : 'none'};
+    background-color: ${({isMenuOpen}) => isMenuOpen ? '#635AFC' : '#979797'};
+    transform: ${({isMenuOpen}) => isMenuOpen ? 'rotate(-45deg)' : 'none'};
     transform-origin: bottom left;
     transition: 0.2s;
 `
@@ -47,15 +46,15 @@ export const LinksWrapper = styled.div`
     left:0;
     width: 100%;
     box-shadow: 0 1.2rem 2.4rem rgba(0,0,0,0.12);
-    opacity: ${props => props.isMenuOpen ? 1 : 0};
-    pointer-events: ${props => props.isMenuOpen ? "all" : "none"};
+    opacity: ${({isMenuOpen}) => isMenuOpen ? 1 : 0};
+    pointer-events: ${({isMenuOpen}) => isMenuOpen ? "all" : "none"};
     transition: 0.4s;
-    transform: scaleY(${props => props.isMenuOpen ? 1 : 0.2});
+    transform: scaleY(${({isMenuOpen}) => isMenuOpen ? 1 : 0.2});
     transform-origin: top;
-    z-index: 10;
+    z-index: 15;
 
     .menu-title {
-        color: ${props => props.isMenuOpen ? "#505050" : "white"};
+        color: ${({isMenuOpen}) => isMenuOpen ? "#505050" : "white"};
         font-family: 'Montserrat';
         font-size: 1.2rem;
         font-weight: bold;
@@ -67,7 +66,7 @@ export const LinksWrapper = styled.div`
 `
 
 export const MenuLink = styled.div`
-    font-family: 'Montserrat';;
+    font-family: 'Montserrat';
     font-size: 1.8rem;
     font-weight: 300;
     color: #505050;

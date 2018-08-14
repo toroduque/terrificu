@@ -11,11 +11,11 @@ const Menu = ({ onClick, isMenuOpen }) => (
             <styled.MenuLink>Contact</styled.MenuLink>
         </styled.LinksWrapper>
 
-        <styled.MenuIconWrapper onClick={onClick}>
+        <styled.CloseIconWrapper onClick={onClick} isMenuOpen={isMenuOpen}>
             <styled.Top isMenuOpen={isMenuOpen}/>
             <styled.Mid isMenuOpen={isMenuOpen}/>
             <styled.Bot isMenuOpen={isMenuOpen}/>
-        </styled.MenuIconWrapper>
+        </styled.CloseIconWrapper>
     </styled.MenuWrapper>
 )
 

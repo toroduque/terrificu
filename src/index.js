@@ -3,9 +3,7 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { injectGlobal } from 'styled-components'
 import { render } from 'react-dom';
-import Header from './components/Header'
-import Home from "./scenes/Home"
-import TaskList from "./scenes/TaskList"
+import App from './components/App'
 
 injectGlobal`
     body {
@@ -13,16 +11,10 @@ injectGlobal`
     }
 `;
 
-const App = () => (
-    <div>
-        <Header />
-        <BrowserRouter>
-            <Switch>
-                <Route exact path="/" component={Home} />
-                <Route path="/task-list" component={TaskList} />
-            </Switch>
-        </BrowserRouter>
-    </div>
+const Index = () => (
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
 )
 
-render(<App />, document.getElementById('app'))
+render(<Index />, document.getElementById('app'))

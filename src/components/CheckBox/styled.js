@@ -5,7 +5,7 @@ export const CheckBoxWrapper = styled.div.attrs({
 })`
     width: 1.4rem;
     height: 1.5rem;
-    border: solid 1px #c7c7c7;
+    border: solid 1px #979797;
     border-radius: 50%;
     cursor: pointer;
     display: flex;

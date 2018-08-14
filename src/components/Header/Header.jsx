@@ -1,9 +1,7 @@
-/* eslint-disable */
-
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import Image from "../Image";
-import Menu from "./MenuIcon";
+import Logo from "../Logo";
+import Menu from "./Menu";
 import * as styled from "./styled";
 
 class Header extends Component {
@@ -11,17 +9,21 @@ class Header extends Component {
         isMenuOpen: false
     }
 
-    setIsMenuOpen() {
-        this.setState({ isMenuOpen: !this.state.isMenuOpen })
+    setIsMenuOpen = () => {
+        this.setState( prevState => ({ isMenuOpen: !prevState.isMenuOpen }))
     }
 
     render() {
+        const { isMenuOpen } = this.state
+
         return (
             <styled.HeaderWrapper>
-                <Image />
+                <Link to="/">
+                    <Logo/>
+                </Link>
                 <Menu
-                    onClick={() => this.setIsMenuOpen()}
-                    isMenuOpen={this.state.isMenuOpen}
+                    onClick={this.setIsMenuOpen}
+                    isMenuOpen={isMenuOpen}
                 />
             </styled.HeaderWrapper>
         );

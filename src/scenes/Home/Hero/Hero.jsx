@@ -40,7 +40,9 @@ class Hero extends Component {
                     { isShowingNewTaskForm && (
                         <Fragment>
                             <input type="text" placeholder="...i.g Book hotel in amsterdam"/>
-                            <styled.ConfirmButton type="submit"><Link to="/task-list">Add task</Link></styled.ConfirmButton>
+                            <Link to="/task-list">
+                                <styled.ConfirmButton type="submit">Add task</styled.ConfirmButton>
+                            </Link>
                         </Fragment>
                     )}
                 </styled.AddTaskFormWrapper>

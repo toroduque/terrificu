@@ -1,6 +1,6 @@
 import React from "react";
 
-const Image = () => (
+const Logo = () => (
     <svg width="75" height="16" xmlns="http://www.w3.org/2000/svg">
         <g fill="none">
             <path
@@ -13,4 +13,4 @@ const Image = () => (
     </svg>
 );
 
-export default Image
+export default Logo
