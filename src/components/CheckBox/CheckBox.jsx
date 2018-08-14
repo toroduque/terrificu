@@ -11,7 +11,6 @@ class CheckBox extends Component {
 
     render() {
         const { isActive } = this.state
-        console.log('isActive',isActive);
 
         return (
             <styled.CheckBoxWrapper

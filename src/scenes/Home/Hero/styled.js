@@ -88,7 +88,7 @@ const addTaskFormDisplayed = `
 `
 
 export const AddTaskFormWrapper = styled.div`
-    transition: 0.5s;
+    transition: 0.5s, background-color 0s;
     z-index: 10;
     position: relative;
     ${ props => props.isShowingNewTaskForm ? addTaskFormDisplayed : addTaskFormHidden };

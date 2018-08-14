@@ -1,4 +1,6 @@
 const path = require("path");
+const Dotenv = require('dotenv-webpack');
+
 
 module.exports = {
     context: __dirname,
@@ -14,6 +16,9 @@ module.exports = {
         historyApiFallback: true,
         port: 9000
     },
+    plugins: [
+        new Dotenv()
+    ],
     resolve: {
         extensions: [".js", ".jsx", ".json"]
     },
