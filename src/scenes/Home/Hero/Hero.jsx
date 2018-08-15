@@ -1,11 +1,20 @@
 import React, { Component, Fragment } from "react";
 import { Link } from 'react-router-dom';
+import * as API from '../../../../services/api'
 import Overlay from '../../../components/Overlay'
 import Icon from '../../../components/Icon'
 import * as styled from "./styled";
 
 class Hero extends Component {
-    state = { isShowingNewTaskForm: false }
+    state = {
+        isShowingNewTaskForm: false,
+        taskDescription: "",
+    }
+
+     setTaskDescription = (e) => {
+         const taskDescription = e.target.value
+         this.setState({taskDescription})
+     }
 
     toggleTest = () => {
         this.setState(prevState => ({ isShowingNewTaskForm: !prevState.isShowingNewTaskForm }))
@@ -22,7 +31,7 @@ class Hero extends Component {
     }
 
     render(){
-        const { isShowingNewTaskForm } = this.state
+        const { isShowingNewTaskForm, taskDescription } = this.state
 
         return (
             <Fragment>
@@ -39,9 +48,9 @@ class Hero extends Component {
 
                     { isShowingNewTaskForm && (
                         <Fragment>
-                            <input type="text" placeholder="...i.g Book hotel in amsterdam"/>
+                            <input type="text" onChange={this.setTaskDescription} value={taskDescription} placeholder="...i.g Book hotel in amsterdam"/>
                             <Link to="/task-list">
-                                <styled.ConfirmButton type="submit">Add task</styled.ConfirmButton>
+                                <styled.ConfirmButton onClick={() => API.createNewTask(taskDescription)} type="submit">Add task</styled.ConfirmButton>
                             </Link>
                         </Fragment>
                     )}
