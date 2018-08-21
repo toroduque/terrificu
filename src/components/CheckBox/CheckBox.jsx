@@ -5,6 +5,13 @@ import * as styled from './styled'
 class CheckBox extends Component {
     state = { isActive: false }
 
+    handleOnClick = () => {
+        const { onClick } = this.props
+
+        this.toggleIsActive()
+        onClick()
+    }
+
     toggleIsActive = () => {
         this.setState(prevState => ({ isActive: !prevState.isActive }))
     }
@@ -14,7 +21,7 @@ class CheckBox extends Component {
 
         return (
             <styled.CheckBoxWrapper
-                onClick={this.toggleIsActive}
+                onClick={this.handleOnClick}
                 isActive={isActive}
             >
                 {isActive && (

@@ -1,33 +1,39 @@
-import React, { Component } from 'react';
-import Icon from '../../../components/Icon'
-import CheckBox from '../../../components/CheckBox'
-import * as styled from './styled';
+import React from "react";
+import { withRouter } from "react-router-dom";
+import { SortableHandle } from "react-sortable-hoc";
+import * as API from "../../../../services/api";
+import Icon from "../../../components/Icon";
+import CheckBox from "../../../components/CheckBox";
+import * as styled from "./styled";
 
-class TaskCard extends Component {
-    state = {
-        isTaskDone: false
-    }
+const DragHandle = SortableHandle(() => (
+    <styled.DragIconWrapper>
+        <Icon glyph="drag" size="14" color="#747474" />
+    </styled.DragIconWrapper>
+));
 
-    render() {
-        const { isTaskDone } = this.state;
-        const { description } = this.props;
-        console.log('isTaskDone', isTaskDone)
+const TaskCard = ({ id, description }) => {
+    const markTaskAsDone = taskId => {
+        const taskDone = {
+            isDone: true,
+            completedTime: new Date()
+        };
 
-        return (
-            <styled.TaskCardWrapper>
-                <styled.DragIconWrapper>
-                    <Icon glyph="drag" size="14" color="#747474"/>
-                </styled.DragIconWrapper>
-                <styled.DescriptionWrapper>{ description }</styled.DescriptionWrapper>
-                <styled.CheckBoxWrapper>
-                    <CheckBox />
-                </styled.CheckBoxWrapper>
-                <styled.MenuOptionsWrapper>
-                    <Icon glyph="options" size="14" color="#747474" />
-                </styled.MenuOptionsWrapper>
-            </styled.TaskCardWrapper>
-        )
-    }
-}
+        return API.updateTask(taskId, taskDone).then(() => window.location.reload()); // temporal fix
+    };
 
-export default TaskCard
+    return (
+        <styled.TaskCardWrapper>
+            <DragHandle />
+            <styled.DescriptionWrapper>{description}</styled.DescriptionWrapper>
+            <styled.CheckBoxWrapper>
+                <CheckBox onClick={() => markTaskAsDone(id)} />
+            </styled.CheckBoxWrapper>
+            <styled.MenuOptionsWrapper>
+                <Icon glyph="options" size="14" color="#747474" />
+            </styled.MenuOptionsWrapper>
+        </styled.TaskCardWrapper>
+    );
+};
+
+export default withRouter(TaskCard);

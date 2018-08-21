@@ -8,6 +8,8 @@ export const TaskCardWrapper = styled.div`
     font-size: 1.8rem;
     font-weight: 300;
     border-bottom: solid 1px #e4e4e4;
+    border-top: solid 1px #e4e4e4;
+    background-color: white;
 `
 
 export const DescriptionWrapper = styled.div`
@@ -16,6 +18,9 @@ export const DescriptionWrapper = styled.div`
 
 export const DragIconWrapper = styled.div`
     margin: 1.2rem;
+    &:hover {
+        cursor: pointer;
+    }
 `
 
 export const MenuOptionsWrapper = styled.div`
