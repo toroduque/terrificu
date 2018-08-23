@@ -19,7 +19,7 @@ const TaskCard = ({ id, description }) => {
             completedTime: new Date()
         };
 
-        return API.updateTask(taskId, taskDone).then(() => window.location.reload()); // temporal fix
+        return API.updateTask(taskId, taskDone).then(() => window.location.reload()); // temporal fix to refresh page
     };
 
     return (

@@ -22,14 +22,14 @@ export const getTasks = () => {
     })
 }
 
-// export const getUndoneTasks = () => {
-//     return new Promise(resolve => {
-//         return tasksRef
-//             .orderByChild("isDone")
-//             .equalTo(false)
-//             .on("child_added", data => resolve(data.val()) )
-//     })
-// }
+export const getUndoneTasks = () => {
+    return new Promise(resolve => {
+        return tasksRef
+            .orderByChild("isDone")
+            .equalTo(false)
+            .on('value', data => resolve(data.val()))
+    })
+}
 
 export const updateTask = (id, updates) => {
     return database.ref().child(`/tasks/${id}`).update(updates)

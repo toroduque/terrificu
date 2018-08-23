@@ -10,7 +10,7 @@ class TaskList extends Component {
     };
 
     componentWillMount() {
-        API.getTasks().then(tasksList => {
+        API.getUndoneTasks().then(tasksList => {
             const tasksArray = [];
             Object.keys(tasksList).map(key => {
                 const taskObject = {
@@ -43,14 +43,12 @@ class TaskList extends Component {
                     {tasks &&
                         tasks.map((task, index) => {
                             return (
-                                !task.isDone && (
-                                    <SortableTaskCard
-                                        key={task.key}
-                                        id={task.key}
-                                        index={index}
-                                        description={task.task}
-                                    />
-                                )
+                                <SortableTaskCard
+                                    key={task.key}
+                                    id={task.key}
+                                    index={index}
+                                    description={task.task}
+                                />
                             );
                         })}
                 </div>
