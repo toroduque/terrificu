@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { SortableContainer, SortableElement, arrayMove } from "react-sortable-hoc";
+import fecha from 'fecha'
 import * as API from "../../../services/api";
+import Modal from '../../components/Modal'
+import Overlay from '../../components/Overlay'
 import TaskCard from "./TaskCard";
 import * as styled from "./styled";
 
@@ -55,14 +58,19 @@ class TaskList extends Component {
             );
         });
 
+        // fecha format
+        fecha.masks.normalDate = 'D/M/YYYY'
+
         return (
             <Fragment>
                 <styled.TopBarWrapper>
-                    <div>02/02/2018</div>
+                    <div>{fecha.format(new Date(), 'normalDate')}</div>
                     <div>{tasksList && tasksList.length} Tasks</div>
                     <div>Add task + </div>
                 </styled.TopBarWrapper>
                 <SortableList tasks={tasksList} onSortEnd={this.onSortEnd} useDragHandle lockAxis="y"/>;
+                <Modal />
+                <Overlay />
             </Fragment>
         );
     }
