@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import * as API from '../../../services/api'
+import Icon from '../Icon'
 import * as styled from './styled'
 
 class Modal extends Component {
@@ -40,7 +41,13 @@ class Modal extends Component {
         return ReactDOM.createPortal(
             <Fragment>
                 <styled.ModalWrapper>
-                    Add task
+                    <styled.TitleWrapper>
+                        <styled.AddTaskTitle >
+                             Add New Task
+                        </styled.AddTaskTitle>
+                        <Icon glyph="x" size="12" color="purple" />
+                    </styled.TitleWrapper>
+
                     <input
                         type="text"
                         value={taskDescription}

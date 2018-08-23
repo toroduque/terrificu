@@ -49,3 +49,26 @@ export const ConfirmButton = styled.button`
         text-decoration: none;
     }
 `
+
+export const TitleWrapper = styled.div`
+    display: flex;
+    justify-content: space-between;
+
+    svg {
+        transition: 0.6s;
+
+        &:hover {
+            cursor: pointer;
+            transform: rotate(90deg);
+            transition: 0.4s;
+        }
+    }
+`
+
+export const AddTaskTitle = styled.div`
+    color: #4b4b4b;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+`
