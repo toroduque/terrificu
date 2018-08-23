@@ -9,7 +9,8 @@ import * as styled from "./styled";
 
 class TaskList extends Component {
     state = {
-        tasksList: null
+        tasksList: null,
+        isShowingNewTaskForm: false
     };
 
     componentWillMount() {
@@ -34,8 +35,16 @@ class TaskList extends Component {
         }));
     };
 
+    showNewTaskForm = () => {
+        this.setState({ isShowingNewTaskForm: true })
+    }
+
+    hideNewTaskForm = () => {
+        this.setState({ isShowingNewTaskForm: false })
+    }
+
     render() {
-        const { tasksList } = this.state;
+        const { tasksList, isShowingNewTaskForm } = this.state;
         const SortableTaskCard = SortableElement(({ description, id }) => (
             <TaskCard id={id} description={description} />
         ));
@@ -66,11 +75,17 @@ class TaskList extends Component {
                 <styled.TopBarWrapper>
                     <div>{fecha.format(new Date(), 'normalDate')}</div>
                     <div>{tasksList && tasksList.length} Tasks</div>
-                    <div>Add task + </div>
+                    <styled.AddTaskButton onClick={this.showNewTaskForm}> Add task + </styled.AddTaskButton>
                 </styled.TopBarWrapper>
                 <SortableList tasks={tasksList} onSortEnd={this.onSortEnd} useDragHandle lockAxis="y"/>;
-                <Modal />
-                <Overlay />
+
+                { isShowingNewTaskForm && (
+                    <Fragment>
+                        <Modal />
+                        <Overlay onClick={this.hideNewTaskForm}/>
+                    </Fragment>
+                )}
+
             </Fragment>
         );
     }

@@ -11,6 +11,10 @@ injectGlobal`
     body {
         font-family: 'Montserrat', 'Helvetica', 'Arial', sans-serif;
     }
+
+    button {
+        font-family: 'Montserrat', 'Helvetica', 'Arial', sans-serif;
+    }
 `;
 
 const Index = () => {

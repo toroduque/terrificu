@@ -28,3 +28,24 @@ export const ModalWrapper = styled.div`
         outline: none;
     }
 `
+
+export const ConfirmButton = styled.button`
+    outline: none;
+    border: none;
+    background-color: #55d4b7;
+    color: white;
+    padding: 1.2rem 2.4rem;
+    margin-top: 4.6rem;
+    font-size: 1.5rem;
+    float: right;
+
+    &:hover {
+        background-color: #44c3a5;
+        cursor: pointer;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+    }
+`

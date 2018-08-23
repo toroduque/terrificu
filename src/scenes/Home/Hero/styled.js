@@ -117,7 +117,6 @@ export const ConfirmButton = styled.button`
     padding: 1.2rem 2.4rem;
     margin-top: 4.6rem;
     font-size: 1.5rem;
-    font-family: 'Montserrat';
     float: right;
 
     &:hover {
