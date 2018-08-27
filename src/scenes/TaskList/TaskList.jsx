@@ -4,6 +4,7 @@ import fecha from 'fecha'
 import * as API from "../../../services/api";
 import Modal from '../../components/Modal'
 import Overlay from '../../components/Overlay'
+import Spinner from '../../components/Spinner'
 import TaskCard from "./TaskCard";
 import * as styled from "./styled";
 
@@ -48,6 +49,10 @@ class TaskList extends Component {
         const SortableTaskCard = SortableElement(({ description, id }) => (
             <TaskCard id={id} description={description} />
         ));
+
+        if(!tasksList) {
+            return <Spinner />
+        }
 
         const SortableList = SortableContainer(({ tasks }) => {
             return (
