@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from 'react-router-dom';
-import Logo from "../Logo";
+import Logo from "components/Logo";
 import Menu from "./Menu";
 import * as styled from "./styled";
 

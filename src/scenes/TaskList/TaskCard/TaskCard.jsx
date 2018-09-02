@@ -1,9 +1,9 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { SortableHandle } from "react-sortable-hoc";
-import * as API from "../../../../services/api";
-import Icon from "../../../components/Icon";
-import CheckBox from "../../../components/CheckBox";
+import * as API from "services/api";
+import Icon from "components/Icon";
+import CheckBox from "components/CheckBox";
 import * as styled from "./styled";
 
 const DragHandle = SortableHandle(() => (

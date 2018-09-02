@@ -1,8 +1,8 @@
 import React, { Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom'
-import Home from '../../scenes/Home'
-import TaskList from '../../scenes/TaskList'
-import Header from '../Header'
+import Home from 'scenes/Home'
+import TaskList from 'scenes/TaskList'
+import Header from 'components/Header'
 
 const App = () => (
     <Fragment>

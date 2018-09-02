@@ -1,7 +1,6 @@
 const path = require("path");
 const Dotenv = require('dotenv-webpack');
 
-
 module.exports = {
     context: __dirname,
     entry: "./src/index.js",
@@ -20,7 +19,8 @@ module.exports = {
         new Dotenv()
     ],
     resolve: {
-        extensions: [".js", ".jsx", ".json"]
+        extensions: [".js", ".jsx", ".json"],
+        modules: [path.resolve(__dirname, 'src'), "node_modules"]
     },
     stats: {
         colors: true,

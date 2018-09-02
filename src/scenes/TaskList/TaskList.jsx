@@ -1,12 +1,15 @@
 import React, { Component, Fragment } from "react";
 import { SortableContainer, SortableElement, arrayMove } from "react-sortable-hoc";
 import fecha from 'fecha'
-import * as API from "../../../services/api";
-import Modal from '../../components/Modal'
-import Overlay from '../../components/Overlay'
-import Spinner from '../../components/Spinner'
+import * as API from "services/api";
+import Modal from 'components/Modal'
+import Overlay from 'components/Overlay'
+import Spinner from 'components/Spinner'
 import TaskCard from "./TaskCard";
 import * as styled from "./styled";
+
+// fecha format
+fecha.masks.normalDate = 'D/M/YYYY'
 
 class TaskList extends Component {
     state = {
@@ -72,9 +75,6 @@ class TaskList extends Component {
             );
         });
 
-        // fecha format
-        fecha.masks.normalDate = 'D/M/YYYY'
-
         return (
             <Fragment>
                 <styled.TopBarWrapper>
@@ -90,7 +90,6 @@ class TaskList extends Component {
                         <Overlay onClick={this.hideNewTaskForm}/>
                     </Fragment>
                 )}
-
             </Fragment>
         );
     }

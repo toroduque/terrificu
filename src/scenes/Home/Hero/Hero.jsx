@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Link } from 'react-router-dom';
-import * as API from '../../../../services/api'
-import Overlay from '../../../components/Overlay'
-import Icon from '../../../components/Icon'
+import * as API from 'services/api'
+import Overlay from 'components/Overlay'
+import Icon from 'components/Icon'
 import * as styled from "./styled";
 
 class Hero extends Component {

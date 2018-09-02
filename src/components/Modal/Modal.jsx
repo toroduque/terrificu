@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import ReactDOM from 'react-dom';
-import * as API from '../../../services/api'
-import Icon from '../Icon'
+import * as API from 'services/api'
+import Icon from 'components/Icon'
 import * as styled from './styled'
 
 class Modal extends Component {
