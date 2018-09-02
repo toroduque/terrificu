@@ -2,7 +2,8 @@ import React, { Component, Fragment } from "react";
 import { SortableContainer, SortableElement, arrayMove } from "react-sortable-hoc";
 import fecha from 'fecha'
 import * as API from "services/api";
-import Modal from 'components/Modal'
+import Toggle from 'components/Toggle'
+import NewTaskModal from 'components/modals/NewTaskModal'
 import Overlay from 'components/Overlay'
 import Spinner from 'components/Spinner'
 import TaskCard from "./TaskCard";
@@ -14,7 +15,6 @@ fecha.masks.normalDate = 'D/M/YYYY'
 class TaskList extends Component {
     state = {
         tasksList: null,
-        isShowingNewTaskForm: false
     };
 
     componentWillMount() {
@@ -39,16 +39,8 @@ class TaskList extends Component {
         }));
     };
 
-    showNewTaskForm = () => {
-        this.setState({ isShowingNewTaskForm: true })
-    }
-
-    hideNewTaskForm = () => {
-        this.setState({ isShowingNewTaskForm: false })
-    }
-
     render() {
-        const { tasksList, isShowingNewTaskForm } = this.state;
+        const { tasksList } = this.state;
         const SortableTaskCard = SortableElement(({ description, id }) => (
             <TaskCard id={id} description={description} />
         ));
@@ -77,19 +69,24 @@ class TaskList extends Component {
 
         return (
             <Fragment>
-                <styled.TopBarWrapper>
-                    <div>{fecha.format(new Date(), 'normalDate')}</div>
-                    <div>{tasksList && tasksList.length} Tasks</div>
-                    <styled.AddTaskButton onClick={this.showNewTaskForm}> Add task + </styled.AddTaskButton>
-                </styled.TopBarWrapper>
-                <SortableList tasks={tasksList} onSortEnd={this.onSortEnd} useDragHandle lockAxis="y"/>;
-
-                { isShowingNewTaskForm && (
-                    <Fragment>
-                        <Modal />
-                        <Overlay onClick={this.hideNewTaskForm}/>
-                    </Fragment>
-                )}
+                <Toggle>
+                    {({isOn, toggle}) => (
+                        <Fragment>
+                            <styled.TopBarWrapper>
+                                <div>{fecha.format(new Date(), 'normalDate')}</div>
+                                <div>{tasksList && tasksList.length} Tasks</div>
+                                <styled.AddTaskButton onClick={toggle}> Add task + </styled.AddTaskButton>
+                            </styled.TopBarWrapper>
+                            <SortableList tasks={tasksList} onSortEnd={this.onSortEnd} useDragHandle lockAxis="y"/>;
+                            { isOn && (
+                                <Fragment>
+                                    <NewTaskModal onClose={toggle}/>
+                                    <Overlay onClick={toggle}/>
+                                </Fragment>
+                            )}
+                        </Fragment>
+                    )}
+                </Toggle>
             </Fragment>
         );
     }

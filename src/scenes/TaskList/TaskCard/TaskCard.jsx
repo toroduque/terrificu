@@ -1,7 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { SortableHandle } from "react-sortable-hoc";
-import * as API from "services/api";
+import * as Api from "services/api";
 import Icon from "components/Icon";
 import CheckBox from "components/CheckBox";
 import * as styled from "./styled";
@@ -19,7 +19,7 @@ const TaskCard = ({ id, description }) => {
             completedTime: new Date()
         };
 
-        return API.updateTask(taskId, taskDone).then(() => window.location.reload()); // temporal fix to refresh page
+        return Api.updateTask(taskId, taskDone).then(() => window.location.reload()); // temporal fix to refresh page
     };
 
     return (

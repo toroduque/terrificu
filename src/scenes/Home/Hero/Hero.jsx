@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from 'react-router-dom';
-import * as API from 'services/api'
+import * as Api from 'services/api'
 import Overlay from 'components/Overlay'
 import Icon from 'components/Icon'
 import * as styled from "./styled";
@@ -50,7 +50,7 @@ class Hero extends Component {
                         <Fragment>
                             <input type="text" onChange={this.setTaskDescription} value={taskDescription} placeholder="...i.g Book hotel in amsterdam"/>
                             <Link to="/task-list">
-                                <styled.ConfirmButton onClick={() => API.createNewTask(taskDescription)} type="submit">Add task</styled.ConfirmButton>
+                                <styled.ConfirmButton onClick={() => Api.createNewTask(taskDescription)} type="submit">Add task</styled.ConfirmButton>
                             </Link>
                         </Fragment>
                     )}
