@@ -78,6 +78,7 @@ class TaskList extends Component {
                                 <styled.AddTaskButton onClick={toggle}> Add task + </styled.AddTaskButton>
                             </styled.TopBarWrapper>
                             <SortableList tasks={tasksList} onSortEnd={this.onSortEnd} useDragHandle lockAxis="y"/>;
+
                             { isOn && (
                                 <Fragment>
                                     <NewTaskModal onClose={toggle}/>
