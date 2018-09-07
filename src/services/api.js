@@ -3,11 +3,12 @@ import { database } from './firebase'
 // firebase db
 const tasksRef = database.ref('tasks')
 
-export const createNewTask = (task) => {
+export const createNewTask = (task, uid) => {
     const currentDate = new Date()
     const creationTime = currentDate.toString()
 
     const taskObject = {
+        uid,
         task,
         creationTime,
         isDone: false
@@ -25,8 +26,8 @@ export const getTasks = () => {
 export const getUndoneTasks = () => {
     return new Promise(resolve => {
         return tasksRef
-            .orderByChild("isDone")
-            .equalTo(false)
+            .orderByChild("uid")
+            .equalTo("lc1DAj1TmSfnYUWrXo8EjwRl1w62")
             .on('value', data => resolve(data.val()))
     })
 }

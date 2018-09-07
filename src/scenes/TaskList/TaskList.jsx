@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { SortableContainer, SortableElement, arrayMove } from "react-sortable-hoc";
 import fecha from 'fecha'
 import * as API from "services/api";
+import { UserContext } from 'services/contexts';
 import Toggle from 'components/Toggle'
 import NewTaskModal from 'components/modals/NewTaskModal'
 import Overlay from 'components/Overlay'
@@ -17,7 +18,7 @@ class TaskList extends Component {
         tasksList: null,
     };
 
-    componentWillMount() {
+    componentDidMount() {
         API.getUndoneTasks().then(tasksList => {
             const tasksArray = [];
             Object.keys(tasksList).map(key => {
@@ -68,27 +69,30 @@ class TaskList extends Component {
         });
 
         return (
-            <Fragment>
-                <Toggle>
-                    {({isOn, toggle}) => (
-                        <Fragment>
-                            <styled.TopBarWrapper>
-                                <div>{fecha.format(new Date(), 'normalDate')}</div>
-                                <div>{tasksList && tasksList.length} Tasks</div>
-                                <styled.AddTaskButton onClick={toggle}> Add task + </styled.AddTaskButton>
-                            </styled.TopBarWrapper>
-                            <SortableList tasks={tasksList} onSortEnd={this.onSortEnd} useDragHandle lockAxis="y"/>;
+            <UserContext.Consumer>
+                { ({user}) => (
+                    <Toggle>
+                        {({isOn, toggle}) => (
+                            <Fragment>
+                                { console.log('CONTExT =>', user) }
+                                <styled.TopBarWrapper>
+                                    <div>{fecha.format(new Date(), 'normalDate')}</div>
+                                    <div>{tasksList && tasksList.length} Tasks</div>
+                                    <styled.AddTaskButton onClick={toggle}> Add task + </styled.AddTaskButton>
+                                </styled.TopBarWrapper>
+                                <SortableList tasks={tasksList} onSortEnd={this.onSortEnd} useDragHandle lockAxis="y"/>;
 
-                            { isOn && (
-                                <Fragment>
-                                    <NewTaskModal onClose={toggle}/>
-                                    <Overlay onClick={toggle}/>
-                                </Fragment>
-                            )}
-                        </Fragment>
-                    )}
-                </Toggle>
-            </Fragment>
+                                { isOn && (
+                                    <Fragment>
+                                        <NewTaskModal onClose={toggle}/>
+                                        <Overlay onClick={toggle}/>
+                                    </Fragment>
+                                )}
+                            </Fragment>
+                        )}
+                    </Toggle>
+                )}
+            </UserContext.Consumer>
         );
     }
 }

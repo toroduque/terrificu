@@ -1,19 +1,20 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { Route, Switch } from 'react-router-dom'
 import Home from 'scenes/Home'
 import TaskList from 'scenes/TaskList'
 import SignIn from 'scenes/SignIn'
 import Header from 'components/Header'
+import UserProvider from 'components/UserProvider'
 
 const App = () => (
-    <Fragment>
+    <UserProvider>
         <Header />
         <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/task-list" component={TaskList} />
             <Route path="/sign-in" component={SignIn} />
         </Switch>
-    </Fragment>
+    </UserProvider>
 )
 
 export default App
