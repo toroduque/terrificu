@@ -19,7 +19,8 @@ class TaskList extends Component {
 
     componentDidMount() {
         const { user } = this.props
-        const tasksList = this.arrangeTasks(user.tasksList)
+        const { tasksList } = user
+
         this.setState({tasksList})
     }
 
@@ -29,22 +30,10 @@ class TaskList extends Component {
         }));
     };
 
-    arrangeTasks = (tasksList) => {
-        const tasksArray = [];
-        Object.keys(tasksList).map(key => {
-            const taskObject = {
-                key,
-                ...tasksList[key]
-            };
-
-            return tasksArray.push(taskObject);
-        });
-
-        return tasksArray
-    }
-
     render() {
         const { tasksList } = this.state;
+        console.log( tasksList );
+
         const SortableTaskCard = SortableElement(({ description, id }) => (
             <TaskCard id={id} description={description} />
         ));
@@ -60,10 +49,10 @@ class TaskList extends Component {
                         tasks.map((task, index) => {
                             return (
                                 <SortableTaskCard
-                                    key={task.key}
-                                    id={task.key}
+                                    key={task.id}
+                                    id={task.id}
                                     index={index}
-                                    description={task.task}
+                                    description={task.description}
                                 />
                             );
                         })}

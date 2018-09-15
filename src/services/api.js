@@ -1,44 +1,70 @@
 import { database } from './firebase'
 
 // firebase db
-const tasksRef = database.ref('tasks')
+const tasksCollection = database.collection("tasks")
 
-export const createNewTask = (task, uid) => {
+export const createNewTask = (description, uid) => {
     const currentDate = new Date()
     const creationTime = currentDate.toString()
 
     const taskObject = {
         uid,
-        task,
+        description,
         creationTime,
         isDone: false
     }
 
-    return tasksRef.push(taskObject)
+    return tasksCollection.add(taskObject)
 }
 
-export const getTasksByUser = (uid) => {
-    return new Promise(resolve => {
-        return tasksRef
-            .orderByChild("uid")
-            .equalTo(uid)
-            .on('value', data => resolve(data.val()) )
-    })
+export const getUndoneTasksByUser = (uid) => {
+    return tasksCollection
+        .where('uid', '==', uid)
+        .where('isDone', '==', false)
+        .get()
+        .then(querySnapshot => {
+            const undoneTasks = [];
+
+            querySnapshot.forEach(doc =>
+                undoneTasks.push({
+                    taskId: doc.id,
+                    ...doc.data()
+                })
+            )
+
+            return undoneTasks
+        })
+}
+
+export const getTasks = () => {
+    return tasksCollection.get().then(querySnapshot => {
+        const allTasks = []
+
+        querySnapshot.forEach(doc => allTasks.push({
+            taskId: doc.id,
+            ...doc.data()
+        }));
+
+        return allTasks
+    });
 }
 
 export const getUndoneTasks = () => {
-    return new Promise(resolve => {
-        return tasksRef
-            .orderByChild("uid")
-            .equalTo("lc1DAj1TmSfnYUWrXo8EjwRl1w62")
-            .on('value', data => resolve(data.val()))
-    })
+    return tasksCollection
+        .where('isDone', '==', false)
+        .get()
+        .then(querySnapshot => {
+            const undoneTasks = []
+
+            querySnapshot.forEach(doc => undoneTasks.push({
+                taskId: doc.id,
+                ...doc.data()
+            }))
+
+            return undoneTasks
+        })
 }
 
 export const updateTask = (id, updates) => {
-    return database.ref().child(`/tasks/${id}`).update(updates)
-}
-
-export const deleteTask = (id) => {
-    tasksRef.remove(id)
+    return tasksCollection.doc(id).update(updates)
 }
