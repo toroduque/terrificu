@@ -13,10 +13,14 @@ const DragHandle = SortableHandle(() => (
 ));
 
 const TaskCard = ({ id, description }) => {
+    
     const markTaskAsDone = taskId => {
+        const currentDate = new Date()
+        const completedTime = currentDate.toString()
+
         const taskDone = {
             isDone: true,
-            completedTime: new Date()
+            completedTime
         };
 
         return Api.updateTask(taskId, taskDone).then(() => window.location.reload()); // temporal fix to refresh page

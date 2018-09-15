@@ -1,5 +1,7 @@
 import firebase from 'firebase'
 
+require("firebase/firestore");
+
 const apiKey = process.env.FIREBASE_API_KEY
 const authDomain = `${process.env.FIREBASE_PROJECT_ID}.firebaseapp.com`
 const databaseURL = `https://${process.env.FIREBASE_PROJECT_ID}.firebaseio.com`
@@ -16,6 +18,10 @@ const firebaseCongif = {
     messagingSenderId
 }
 
-const firebaseApp = firebase.initializeApp(firebaseCongif)
+const firestoneSettings = { timestampsInSnapshots: true };
 
-export const database = firebaseApp.database();
+const firebaseApp = firebase.initializeApp(firebaseCongif)
+const database = firebaseApp.firestore();
+database.settings(firestoneSettings)
+
+export { database }

@@ -19,17 +19,7 @@ class TaskList extends Component {
 
     componentWillMount() {
         API.getUndoneTasks().then(tasksList => {
-            const tasksArray = [];
-            Object.keys(tasksList).map(key => {
-                const taskObject = {
-                    key,
-                    ...tasksList[key]
-                };
-
-                return tasksArray.push(taskObject);
-            });
-
-            this.setState({ tasksList: tasksArray });
+            this.setState({ tasksList: tasksList || [] });
         });
     }
 
@@ -41,6 +31,8 @@ class TaskList extends Component {
 
     render() {
         const { tasksList } = this.state;
+        console.log( tasksList );
+
         const SortableTaskCard = SortableElement(({ description, id }) => (
             <TaskCard id={id} description={description} />
         ));
@@ -56,10 +48,10 @@ class TaskList extends Component {
                         tasks.map((task, index) => {
                             return (
                                 <SortableTaskCard
-                                    key={task.key}
-                                    id={task.key}
+                                    key={task.taskId}
+                                    id={task.taskId}
                                     index={index}
-                                    description={task.task}
+                                    description={task.description}
                                 />
                             );
                         })}
