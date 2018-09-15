@@ -17,9 +17,12 @@ export const createNewTask = (task, uid) => {
     return tasksRef.push(taskObject)
 }
 
-export const getTasks = () => {
+export const getTasksByUser = (uid) => {
     return new Promise(resolve => {
-        return tasksRef.on('value', data => resolve(data.val()) )
+        return tasksRef
+            .orderByChild("uid")
+            .equalTo(uid)
+            .on('value', data => resolve(data.val()) )
     })
 }
 

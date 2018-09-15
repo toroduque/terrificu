@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from 'react-router-dom';
 import * as Api from 'services/api'
+import withUserContext from 'components/hoc/withUserContext'
 import Overlay from 'components/Overlay'
 import Icon from 'components/Icon'
 import * as styled from "./styled";
@@ -32,6 +33,7 @@ class Hero extends Component {
 
     render(){
         const { isShowingNewTaskForm, taskDescription } = this.state
+        const { user } = this.props
 
         return (
             <Fragment>
@@ -50,16 +52,15 @@ class Hero extends Component {
                         <Fragment>
                             <input type="text" onChange={this.setTaskDescription} value={taskDescription} placeholder="...i.g Book hotel in amsterdam"/>
                             <Link to="/task-list">
-                                <styled.ConfirmButton onClick={() => Api.createNewTask(taskDescription)} type="submit">Add task</styled.ConfirmButton>
+                                <styled.ConfirmButton onClick={() => Api.createNewTask(taskDescription, user.uid)} type="submit">Add task</styled.ConfirmButton>
                             </Link>
                         </Fragment>
                     )}
                 </styled.AddTaskFormWrapper>
                 { isShowingNewTaskForm && <Overlay onClick={this.hideNewTaskForm}/> }
             </Fragment>
-
         )
     }
 };
 
-export default Hero;
+export default withUserContext(Hero);

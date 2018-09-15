@@ -17,12 +17,10 @@ injectGlobal`
     }
 `;
 
-const Index = () => {
-    return (
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    )
-}
+const Index = () => (
+    <BrowserRouter>
+        <App />
+    </BrowserRouter>
+)
 
 render(<Index />, document.getElementById('app'))

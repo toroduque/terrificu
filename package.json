@@ -59,6 +59,7 @@
 		"firebaseui": "^3.4.0",
 		"identity-obj-proxy": "^3.0.0",
 		"jest": "^23.3.0",
+		"lodash.get": "^4.4.2",
 		"npm": "^6.4.1",
 		"react": "^16.4.1",
 		"react-dom": "^16.4.1",

@@ -1,19 +1,26 @@
 import React, { Component } from 'react';
 import firebase from 'firebase';
 import { UserContext } from 'services/contexts'
+import * as Api from 'services/api'
 
 class UserProvider extends Component {
-    state ={
+    state = {
         uid: null,
         name: null,
         tasksList: null
     }
 
     componentWillMount(){
-        firebase.auth().onAuthStateChanged(user => this.setState({
-            uid: user.uid,
-            name: user.displayName
-        }))
+        firebase.auth().onAuthStateChanged(user => {
+            Api.getTasksByUser(user.uid)
+                .then( tasksList => {
+                    this.setState({
+                        uid: user.uid,
+                        name: user.displayName,
+                        tasksList
+                    })
+                })
+        })
     }
 
     render() {
