@@ -12,8 +12,8 @@ const DragHandle = SortableHandle(() => (
     </styled.DragIconWrapper>
 ));
 
-const TaskCard = ({ id, description }) => {
-    
+const TaskCard = ({ id, description, history }) => {
+
     const markTaskAsDone = taskId => {
         const currentDate = new Date()
         const completedTime = currentDate.toString()
@@ -23,7 +23,17 @@ const TaskCard = ({ id, description }) => {
             completedTime
         };
 
-        return Api.updateTask(taskId, taskDone).then(() => window.location.reload()); // temporal fix to refresh page
+        return Api.updateTask(taskId, taskDone)
+            .then(() =>
+                Api.getUndoneTasks().then(tasksList => {
+                    const location = {
+                        path: "/task-list",
+                        state: { tasksList }
+                    }
+
+                    history.push(location)
+                })
+            ); 
     };
 
     return (
