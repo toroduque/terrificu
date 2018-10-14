@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from 'react-router-dom';
 import * as Api from 'services/api'
 import { UserContext } from 'services/contexts'
 import Modal from "components/Modal";
@@ -17,8 +18,17 @@ class NewTaskModal extends Component {
 
     handleAddNewTask = (uid) => {
         const { taskDescription } = this.state
+        const { history, onClose } = this.props
+
         Api.createNewTask(taskDescription, uid).then(() => {
-            window.location.reload()
+            Api.getUndoneTasks().then(tasksList => {
+                const location = {
+                    path: "/task-list",
+                    state: { tasksList }
+                }
+                onClose()
+                history.push(location)
+            })
         })
     }
 
@@ -52,4 +62,4 @@ class NewTaskModal extends Component {
     }
 }
 
-export default NewTaskModal;
+export default withRouter(NewTaskModal);

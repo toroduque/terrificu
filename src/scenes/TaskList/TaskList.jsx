@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { withRouter } from "react-router-dom";
 import { SortableContainer, SortableElement, arrayMove } from "react-sortable-hoc";
 import fecha from 'fecha'
 import withUserContext from 'components/hoc/withUserContext';
@@ -30,9 +31,19 @@ class TaskList extends Component {
         }));
     };
 
+    static getDerivedStateFromProps(newProps, prevState) {
+        const newTasks = newProps.location.state && newProps.location.state.tasksList;
+        const currentTaks = prevState.tasksList
+
+        if(newTasks && JSON.stringify(newTasks) !== (JSON.stringify(currentTaks))) {
+            return { tasksList: newProps.location.state.tasksList}
+        }
+
+        return prevState
+    }
+
     render() {
         const { tasksList } = this.state;
-        console.log( tasksList );
 
         const SortableTaskCard = SortableElement(({ description, id }) => (
             <TaskCard id={id} description={description} />
@@ -84,4 +95,4 @@ class TaskList extends Component {
     }
 }
 
-export default withUserContext(TaskList);
+export default withRouter(withUserContext(TaskList))
