@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from 'react-router-dom';
 import * as Api from 'services/api'
 import Modal from "components/Modal";
 import Icon from "components/Icon";
@@ -16,8 +17,17 @@ class NewTaskModal extends Component {
 
     handleAddNewTask = () => {
         const { taskDescription } = this.state
+        const { history, onClose } = this.props
+
         Api.createNewTask(taskDescription).then(() => {
-            window.location.reload()
+            Api.getUndoneTasks().then(tasksList => {
+                const location = {
+                    path: "/task-list",
+                    state: { tasksList }
+                }
+                onClose()
+                history.push(location)
+            })
         })
     }
 
@@ -46,4 +56,4 @@ class NewTaskModal extends Component {
     }
 }
 
-export default NewTaskModal;
+export default withRouter(NewTaskModal);
