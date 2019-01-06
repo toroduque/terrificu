@@ -10,10 +10,11 @@ const App = () => (
     <UserProvider>
         <Header />
         <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" component={SignIn} />
             <Route path="/task-list" component={TaskList} />
-            <Route path="/sign-in" component={SignIn} />
+            <Route path="/home" component={Home} />
         </Switch>
+        <div id="firebaseui-auth-container" />
     </UserProvider>
 )
 

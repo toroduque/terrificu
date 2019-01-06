@@ -12,8 +12,7 @@ const DragHandle = SortableHandle(() => (
     </styled.DragIconWrapper>
 ));
 
-const TaskCard = ({ id, description, history }) => {
-
+const TaskCard = ({ id, uid, description, history }) => {
     const markTaskAsDone = taskId => {
         const currentDate = new Date()
         const completedTime = currentDate.toString()
@@ -25,7 +24,7 @@ const TaskCard = ({ id, description, history }) => {
 
         return Api.updateTask(taskId, taskDone)
             .then(() =>
-                Api.getUndoneTasks().then(tasksList => {
+                Api.getUndoneTasks(uid).then(tasksList => {
                     const location = {
                         path: "/task-list",
                         state: { tasksList }

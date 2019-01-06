@@ -1,4 +1,5 @@
 import firebase from 'firebase'
+import firebaseui from 'firebaseui'
 
 require("firebase/firestore");
 
@@ -20,8 +21,25 @@ const firebaseCongif = {
 
 const firestoneSettings = { timestampsInSnapshots: true };
 
+// Initiate DB access
 const firebaseApp = firebase.initializeApp(firebaseCongif)
 const database = firebaseApp.firestore();
 database.settings(firestoneSettings)
 
+
+// Initiate firebase Auth
+const uiConfig = {
+    signInSuccessUrl: 'http://localhost:9000/task-list',
+    signInOptions: [
+        firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+    ],
+    tosUrl: 'http://localhost:9000/task-list'
+};
+
+const ui = new firebaseui.auth.AuthUI(firebase.auth());
+ui.start('#firebaseui-auth-container', uiConfig);
+
 export { database }
+
+
+

@@ -1,8 +1,10 @@
+/* eslint-disable */
+
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { SortableContainer, SortableElement, arrayMove } from "react-sortable-hoc";
 import fecha from 'fecha'
-import withUserContext from 'components/hoc/withUserContext';
+import { UserContext } from "services/contexts";
 import Toggle from 'components/Toggle'
 import NewTaskModal from 'components/modals/NewTaskModal'
 import Overlay from 'components/Overlay'
@@ -16,13 +18,23 @@ fecha.masks.normalDate = 'D/M/YYYY'
 class TaskList extends Component {
     state = {
         tasksList: null,
+        uid: null
     };
 
     componentDidMount() {
         const { user } = this.props
-        const { tasksList } = user
+        const { user: { tasksList, uid } } = user
 
-        this.setState({tasksList})
+        this.setState({tasksList, uid})
+    }
+
+    componentDidUpdate(prevProps) {
+        const { user } = this.props
+
+        if(JSON.stringify(prevProps.user) !== JSON.stringify(user)) {
+            const { user: { tasksList, uid } } = user
+            this.setState({tasksList, uid})
+        }
     }
 
     onSortEnd = ({ oldIndex, newIndex }) => {
@@ -43,10 +55,10 @@ class TaskList extends Component {
     }
 
     render() {
-        const { tasksList } = this.state;
+        const { tasksList, uid } = this.state;
 
         const SortableTaskCard = SortableElement(({ description, id }) => (
-            <TaskCard id={id} description={description} />
+            <TaskCard key={id} id={id} description={description} />
         ));
 
         if(!tasksList) {
@@ -60,8 +72,9 @@ class TaskList extends Component {
                         tasks.map((task, index) => {
                             return (
                                 <SortableTaskCard
-                                    key={task.id}
-                                    id={task.id}
+                                    uid={uid}
+                                    key={task.taskId}
+                                    id={task.taskId}
                                     index={index}
                                     description={task.description}
                                 />
@@ -95,4 +108,9 @@ class TaskList extends Component {
     }
 }
 
-export default withRouter(withUserContext(TaskList))
+export default withRouter(React.forwardRef((props, ref) => (
+    <UserContext.Consumer>
+        { user => <TaskList {...props} user={user} ref={ref}/> }
+    </UserContext.Consumer>
+))) 
+

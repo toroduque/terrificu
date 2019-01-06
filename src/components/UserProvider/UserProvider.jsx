@@ -10,15 +10,18 @@ class UserProvider extends Component {
         tasksList: null
     }
 
-    componentWillMount() {
+    // BUG COULD BE HERE!
+    componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
+            console.log('user', user)
+
             Api.getUndoneTasksByUser(user.uid)
-                .then( tasksList =>
+                .then( tasksList => {
                     this.setState({
                         uid: user.uid,
                         name: user.displayName,
                         tasksList
-                    })
+                    })}
                 )
         })
     }
