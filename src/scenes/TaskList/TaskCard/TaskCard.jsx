@@ -24,7 +24,7 @@ const TaskCard = ({ id, uid, description, history }) => {
 
         return Api.updateTask(taskId, taskDone)
             .then(() =>
-                Api.getUndoneTasks(uid).then(tasksList => {
+                Api.getUndoneTasksByUser(uid).then(tasksList => {
                     const location = {
                         path: "/task-list",
                         state: { tasksList }

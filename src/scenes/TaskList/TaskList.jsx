@@ -4,6 +4,7 @@ import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import { SortableContainer, SortableElement, arrayMove } from "react-sortable-hoc";
 import fecha from 'fecha'
+import firebase from 'firebase'
 import { UserContext } from "services/contexts";
 import Toggle from 'components/Toggle'
 import NewTaskModal from 'components/modals/NewTaskModal'
@@ -58,7 +59,7 @@ class TaskList extends Component {
         const { tasksList, uid } = this.state;
 
         const SortableTaskCard = SortableElement(({ description, id }) => (
-            <TaskCard key={id} id={id} description={description} />
+            <TaskCard key={id} uid={uid} id={id} description={description} />
         ));
 
         if(!tasksList) {

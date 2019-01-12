@@ -29,9 +29,14 @@ database.settings(firestoneSettings)
 
 // Initiate firebase Auth
 const uiConfig = {
+    signInFlow: 'popup',
     signInSuccessUrl: 'http://localhost:9000/task-list',
     signInOptions: [
         firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+        {
+            provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            requireDisplayName: false
+        }
     ],
     tosUrl: 'http://localhost:9000/task-list'
 };

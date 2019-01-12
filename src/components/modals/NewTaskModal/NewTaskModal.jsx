@@ -21,7 +21,7 @@ class NewTaskModal extends Component {
         const { history, onClose } = this.props
 
         Api.createNewTask(taskDescription, uid).then(() => {
-            Api.getUndoneTasks().then(tasksList => {
+            Api.getUndoneTasksByUser(uid).then(tasksList => {
                 const location = {
                     path: "/task-list",
                     state: { tasksList }

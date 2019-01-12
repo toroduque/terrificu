@@ -13,11 +13,12 @@ class UserProvider extends Component {
     // BUG COULD BE HERE!
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
-            console.log('user', user)
-
+            console.log('user', user.providerData[0].photoURL)
+            console.log('HERE', user.providerData[0].photoURL)
             Api.getUndoneTasksByUser(user.uid)
                 .then( tasksList => {
                     this.setState({
+                        img: user.providerData[0].photoURL,
                         uid: user.uid,
                         name: user.displayName,
                         tasksList
@@ -27,7 +28,7 @@ class UserProvider extends Component {
     }
 
     render() {
-        const { name, tasksList, uid } = this.state
+        const { name, tasksList, uid, img } = this.state
         const { children } = this.props
 
         return (
@@ -36,7 +37,8 @@ class UserProvider extends Component {
                     user: {
                         uid,
                         name,
-                        tasksList
+                        tasksList,
+                        img
                     }
                 }}
             >
